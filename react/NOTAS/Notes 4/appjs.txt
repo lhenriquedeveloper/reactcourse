@@ -1,0 +1,21 @@
+// TRABALHANDO COM EVENTOS
+
+//APP.JS:
+
+import React, { Component } from "react";
+import Membro from "./components/membro/membro";
+
+//props = estáticas.
+//states = estados mutáveis.
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Membro nome="Visitante" />
+      </div>
+    );
+  }
+}
+
+export default App;
