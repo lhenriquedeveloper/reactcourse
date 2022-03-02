@@ -1,0 +1,98 @@
+// STATELESS COMPONENTS, PROPS E CLASS COMPONENTS - INTRO
+
+
+import React, { Component } from "react";
+
+// Stateless Component e Props
+
+const Bemvindo = (props) => {
+  return (
+    <div>
+      <h2>Bem-vindo {props.nome}</h2>
+      <h3>Tenho {props.idade} Anos</h3>
+    </div>
+  );
+};
+
+const Equipe = (props) => {
+  return (
+    <div>
+      <Sobre nome={props.nome} cargo={props.cargo} age={props.age} />
+      <Social fb={props.facebook} />
+      <hr />
+    </div>
+  );
+};
+
+const Sobre = (props) => {
+  return (
+    <div>
+      <h2>Olá sou o(a) {props.nome}</h2>
+      <h3>Cargo: {props.cargo}</h3>
+      <h3>Idade: {props.age}</h3>
+    </div>
+  );
+};
+
+const Social = (props) => {
+  return (
+    <div>
+      <a href={props.fb}>Facebook </a>
+      <a>Linkedin </a>
+      <a>Youtube </a>
+    </div>
+  );
+};
+
+
+
+//Class Components
+
+class Equipe extends Component {
+  render() {
+    return (
+      <div>
+        <Sobre
+          nome={this.props.nome}
+          cargo={this.props.cargo}
+          idade={this.props.idade}
+        />
+        <Social />
+        <hr />
+      </div>
+    );
+  }
+}
+
+class Sobre extends Component {
+  render() {
+    return (
+      <div>
+        <h2> Olá sou o {this.props.nome}</h2>
+        <h3> Cargo: {this.props.cargo}</h3>
+        <h3> Idade: {this.props.idade}</h3>
+      </div>
+    );
+  }
+}
+
+const Social = () => {
+  return (
+    <div>
+      <a>Facebook </a>
+      <a>Linkedin </a>
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <div>
+      <h1>Conheça nossa equipe:</h1>
+      <Equipe nome="Luis" cargo="Developer" idade="24" />
+      <Equipe nome="Junior" cargo="UX Designer" idade="18" />
+    </div>
+  );
+}
+
+export default App;
