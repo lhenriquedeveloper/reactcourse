@@ -1,58 +1,46 @@
-import React from "react";
+import React, { Component } from "react";
 
-// Stateless Component e Props
-/*const Bemvindo = (props) => {
-  return (
-    <div>
-      <h2>Bem-vindo {props.nome}</h2>
-      <h3>Tenho {props.idade} Anos</h3>
-    </div>
-  );
-};*/
+//props = estáticas.
+//states = estados mutáveis.
 
-const Equipe = (props) => {
-  return (
-    <div>
-      <Sobre nome={props.nome} cargo={props.cargo} age={props.age} />
-      <Social fb={props.facebook} />
-      <hr />
-    </div>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contador: 0,
+    };
+    this.aumentar = this.aumentar.bind(this);
+    this.diminuir = this.diminuir.bind(this);
+  }
 
-const Sobre = (props) => {
-  return (
-    <div>
-      <h2>Olá sou o(a) {props.nome}</h2>
-      <h3>Cargo: {props.cargo}</h3>
-      <h3>Idade: {props.age}</h3>
-    </div>
-  );
-};
+  aumentar() {
+    let state = this.state;
+    state.contador += 1;
+    this.setState(state);
+  }
 
-const Social = (props) => {
-  return (
-    <div>
-      <a href={props.fb}>Facebook </a>
-      <a>Linkedin </a>
-      <a>Youtube </a>
-    </div>
-  );
-};
+  diminuir() {
+    let state = this.state;
+    if (state.contador === 0) {
+      alert("O sistema não suporta valores negativos");
+    } else {
+      state.contador -= 1;
+      this.setState(state);
+    }
+  }
 
-function App() {
-  return (
-    <div>
-      <h1>Conheça nossa equipe:</h1>
-      <Equipe nome="Lucas" cargo="Programador" age="29" />
-      <Equipe
-        nome="Luis"
-        cargo="UX designer"
-        age="19"
-        facebook="https://facebook.com/fulanodetal123"
-      />
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h2>CONTADOR:</h2>
+        <h3>
+          <button onClick={this.diminuir}>-</button>
+          {this.state.contador}
+          <button onClick={this.aumentar}>+</button>
+        </h3>
+      </div>
+    );
+  }
 }
 
 export default App;
