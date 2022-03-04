@@ -1,0 +1,80 @@
+// BIGFORM
+
+import React, { Component } from "react";
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      error: ""
+    }
+
+    this.changeName = this.changeName.bind(this);
+    this.changeEmail = this.changeEmail.bind(this);
+    this.changePass = this.changePass.bind(this);
+    this.register = this.register.bind(this);
+  }
+
+  changeName(event) {
+    let typeName = event.target.value;
+    this.setState({ name: typeName });
+  }
+
+  changeEmail(event) {
+    let typeEmail = event.target.value;
+    this.setState({ email: typeEmail });
+  }
+
+  changePass(event) {
+    let typePass = event.target.value;
+    this.setState({ password: typePass });
+  }
+
+  register(event) {
+    const { name, email, password } = this.state;
+
+    if (name !== '' && email !== '' && password !== '') {
+      alert(`Olá seja bem vindo, ${name} \n\n Email : ${email} \n\n Senha: ${password} `);
+    }
+    else {
+      this.setState({ error: 'Preencha todos os dados!' })
+    }
+
+
+    event.preventDefault();
+
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> New User: </h1>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.register}>
+          <label><strong>Full Name: </strong></label>
+          <input type="text" value={this.state.name} onChange={this.changeName}></input>
+
+          <br></br>
+
+          <label><strong>Email: </strong></label>
+          <input type="email" value={this.state.email}
+            onChange={this.changeEmail}></input>
+
+          <br></br>
+
+          <label><strong>Password: </strong></label>
+          <input type="password" value={this.state.password}
+            onChange={this.changePass}></input>
+
+          <br></br><br></br>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    )
+  };
+}
+
+
+export default App;
