@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:ital,wght@1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap");
+$theme: #4c89e3;
+$branco: #fff;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Smooch Sans", sans-serif;
+  font-size: 50px;
+  height: 60px;
+  width: 100%;
+  background-color: $theme;
+  color: $branco;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 700px;
+  background-color: $branco;
+  border-radius: 7px;
+  border-width: 1px;
+  margin: 8px;
+  padding: 10px;
+}
+
+.titulo {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 45px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.subtitulo {
+  font-family: "Slabo 27px", serif;
+  margin: 10px;
+}
+
+.botao {
+  text-decoration: none;
+  height: 40px;
+  background: none;
+  border-radius: 5px;
+  color: $theme;
+  border: 2px solid $theme;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.5s;
+  &:hover {
+    background-color: $theme;
+    color: $branco;
+  }
+}
