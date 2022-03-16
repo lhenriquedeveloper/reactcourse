@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200&display=swap");
+$themecolor: cornflowerblue;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+.lista-filmes {
+  margin: 15px;
+  article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 6px;
+    a {
+      font-family: "Yanone Kaffeesatz", sans-serif;
+      text-decoration: none;
+      color: #fff;
+      background-color: $themecolor;
+      font-size: 30px;
+      width: 100%;
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      transition: 1s;
+      &:hover {
+        background-color: lightskyblue;
+        color: #fff;
+      }
+    }
+  }
+  strong {
+    font-family: "Raleway", sans-serif;
+    padding-bottom: 15px;
+    font-size: 22px;
+    font-style: italic;
+  }
+  img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 700px;
+    max-height: 350px;
+  }
+}
