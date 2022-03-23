@@ -26,11 +26,25 @@ export default function Filme() {
     }
 
     loadFilme();
-
-    return () => {
-      console.log("Componente desmontado!");
-    };
   }, [History, id]);
+
+  function salvaFilme() {
+    const minhaLista = localStorage.getItem("filmes");
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some(
+      (filmesSalvo) => filmesSalvo.id === filme.id
+    );
+
+    if (hasFilme) {
+      alert("Esse filme já está salvo.");
+      return;
+    }
+
+    filmesSalvos.push(filme);
+    localStorage.setItem("filmes", JSON.stringify(filmesSalvos));
+    alert("Filme salvo com sucesso!");
+  }
 
   if (loading) {
     return (
@@ -48,7 +62,7 @@ export default function Filme() {
       <p>{filme.sinopse}</p>
 
       <div className="botoes">
-        <button onClick={() => {}}> Salvar </button>
+        <button onClick={salvaFilme}> Salvar </button>
         <button>
           <a
             target="blank"
