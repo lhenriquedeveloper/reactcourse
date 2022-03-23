@@ -22,7 +22,7 @@ export default function Home() {
             <article key={filme.id}>
               <strong>{filme.nome}</strong>
               <img src={filme.foto} alt={filme.nome} />
-              <Link to="/">Veja a sinopse e o trailer</Link>
+              <Link to={`/filme/${filme.id}`}>Veja a sinopse e o trailer</Link>
             </article>
           );
         })}
