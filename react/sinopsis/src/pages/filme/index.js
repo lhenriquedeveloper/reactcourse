@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../../css/filmeInfoStyle.css";
 import { useParams, useHistory } from "react-router-dom";
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 export default function Filme() {
   const { id } = useParams();
@@ -37,13 +38,13 @@ export default function Filme() {
     );
 
     if (hasFilme) {
-      alert("Esse filme já está salvo.");
+      toast.error("Esse filme já está salvo!");
       return;
     }
 
     filmesSalvos.push(filme);
     localStorage.setItem("filmes", JSON.stringify(filmesSalvos));
-    alert("Filme salvo com sucesso!");
+    toast.success("Filme salvo com sucesso!");
   }
 
   if (loading) {

@@ -1,0 +1,22 @@
+div {
+  margin: 0;
+  padding: 0;
+  h1.error-title {
+    margin-top: 25px;
+    margin-bottom: 80%;
+    font-style: italic;
+    font-size: 30px;
+  }
+  a.errorback {
+    margin-left: 27%;
+    padding: 5px;
+    text-decoration: none;
+    font-family: "Quicksand", sans-serif;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: cornflowerblue;
+    padding: 6px;
+  }
+}
