@@ -1,0 +1,18 @@
+Banco baseado em NoSQL.
+Funciona no sistema de Collections.
+
+Ex:
+-posts (collection)
+--123 (document)
+---titulo: Apredendendo React JS
+---autor: Developer Anonymous
+
+
+-users(collection)
+--1 (document)
+---nome: Anonymous
+---idade: 36
+
+--2 (document)
+---nome: Developer
+---idade: 35
