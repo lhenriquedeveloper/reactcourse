@@ -7,6 +7,8 @@ export default function App() {
   const [titulo, setTitulo] = useState("");
   const [autor, setAutor] = useState("");
   const [posts, setPosts] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   //Fazendo atualização das listas em RealTime com useEffect
   useEffect(() => {
@@ -123,9 +125,59 @@ export default function App() {
       });
   }
 
+  async function excluirPost(id) {
+    await firebase.firestore().collection("posts").doc(id).delete();
+  }
+
+  async function newUser() {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((value) => {
+        console.log("Dados cadastrados com sucesso: " + value);
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        if (error.code === "auth/weak-password") {
+          alert("Senha muito fraca...");
+        } else if (error.code === "auth/email-already-in-use") {
+          alert("Esse email já existe");
+        }
+      });
+  }
+
   return (
     <div>
       <h1> Trabalhando com Firebase </h1>
+      <br />
+
+      <h3>Cadastre seu usuário: </h3>
+      <div className="container">
+        <label>Email: </label>
+        <input
+          type="email"
+          placeholder="Digite seu Email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <br />
+        <label>Senha: </label>
+        <input
+          type="password"
+          placeholder="Digite sua Senha"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <br />
+        <button onClick={newUser}>Cadastrar usuário</button> <br />
+      </div>
+
+      <h3>Post Manegement: </h3>
       <div className="container">
         <label>ID: </label>
         <input
@@ -151,18 +203,25 @@ export default function App() {
             setAutor(e.target.value);
           }}
         />
-        <button onClick={handleAdd}>Cadastrar</button>
-        <button onClick={buscaPost}>Buscar Post</button>
-        <button onClick={editarPost}>Editar Post</button> <br />
+        <button onClick={handleAdd}>Inserir Post</button>
+        <button onClick={buscaPost}>Listar Posts</button>
+        <button onClick={editarPost}>Editar Post</button>
+        <br />
         <ul>
           {posts.map((post) => {
             return (
               <li key={post.id}>
-                <br />
                 <span>ID: {post.id}</span>
                 <br />
                 <span>Titulo : {post.titulo}</span> <br />
-                <span>Autor: {post.autor}</span> <br /> <br />
+                <span>Autor: {post.autor}</span> <br />
+                <button
+                  onClick={() => {
+                    excluirPost(post.id);
+                  }}
+                >
+                  Excluir Post
+                </button>
               </li>
             );
           })}
