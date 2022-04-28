@@ -14,3 +14,5 @@ let firebaseConfig = {
 if (!firebase.apps.lenght) {
     firebase.initializeApp(firebaseConfig);
 }
+
+export default firebase;
