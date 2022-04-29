@@ -10,8 +10,6 @@ export default function RouteWrapper({
 
     const { signed, loading } = useContext(AuthContext);
 
-
-
     if (loading) {
         return (
             <div>
