@@ -1,6 +1,7 @@
 // Context de Autenticação.
 import { createContext, useState, useEffect } from "react";
 import firebase from "../services/firebaseConnection";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -45,10 +46,26 @@ function AuthProvider({ children }) {
 
                 setUser(data);
                 storageUser(data);
+                toast.success('Bem vindo de volta !', {
+                    theme: "dark",
+                    position: "top-right",
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
                 setLoadingAuth(false);
 
             })
             .catch((error) => {
+                toast.error('Algo deu errado !', {
+                    theme: "light",
+                    position: "top-right",
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
                 setLoadingAuth(false);
                 console.log(error);
             })
@@ -77,11 +94,27 @@ function AuthProvider({ children }) {
                         };
                         setUser(data);
                         storageUser(data);
+                        toast.success('Bem vindo a plataforma', {
+                            theme: "dark",
+                            position: "top-right",
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                        });
                         setLoadingAuth(false);
                     })
             })
             .catch((error) => {
                 console.log(error);
+                toast.error('Algo deu errado !', {
+                    theme: "light",
+                    position: "top-right",
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
                 setLoadingAuth(false);
             })
     }
