@@ -11,9 +11,6 @@ import { toast } from 'react-toastify';
 
 
 
-
-
-
 export default function Profile() {
     const { user, signOut, setUser, storageUser } = useContext(AuthContext);
     const [name, setNome] = useState(user && user.name);
@@ -22,6 +19,7 @@ export default function Profile() {
     const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
     const [imageAvatar, setImageAvatar] = useState(null);
 
+    //Funcão para preview da Imagem
     function handleFile(e) {
         if (e.target.files[0]) {
             const image = e.target.files[0];
@@ -31,19 +29,52 @@ export default function Profile() {
             }
             else {
                 toast.error('Envie uma imagem PNG ou JPEG', {
-                    position: "top-center",
+                    position: "top-left",
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: false,
                 });
+                setImageAvatar(null);
+                return null;
             }
         }
     }
 
-    function handleUpload() {
+    //Função para atualização da imagem no firebase, storage e contextos
+    async function handleUpload() {
+        const currentUid = user.uid;
 
+        const uploadTask = await firebase.storage()
+            .ref(`images/${currentUid}/${imageAvatar.name}`)
+            .put(imageAvatar)
+            .then(async () => {
+                console.log("Foto enviada com sucesso");
+
+                await firebase.storage().ref(`images/${currentUid}`)
+                    .child(imageAvatar.name).getDownloadURL()
+                    .then(async (url) => {
+                        let urlFoto = url;
+
+                        await firebase.firestore().collection("users")
+                            .doc(user.uid)
+                            .update({
+                                avatarUrl: urlFoto,
+                                name: name
+                            })
+                            .then(() => {
+                                let data = {
+                                    ...user,
+                                    avatarUrl: urlFoto,
+                                    name: name
+                                }
+                                setUser(data);
+                                storageUser(data);
+                            })
+                    })
+            })
     }
 
+    //Função de salvar alterações -  Condicional: Alterar somente o nome ou Foto + Nome
     async function handleSave(e) {
         e.preventDefault();
 
@@ -62,11 +93,10 @@ export default function Profile() {
                     storageUser(data);
                 })
         }
-        else if (nome !== '' && imageAvatar !== null) {
+        else if (name !== '' && imageAvatar !== null) {
             handleUpload();
         }
     }
-
 
 
     return (

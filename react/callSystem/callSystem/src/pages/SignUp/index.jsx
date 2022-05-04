@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 import logo from "../../assets/logo.png";
 import { AuthContext } from '../../contexts/auth';
 
@@ -20,7 +21,12 @@ function SignUp() {
             setPassword("");
         }
         else {
-            alert("Preencha todos os dados");
+            toast.error('Preencha todos os campos!', {
+                position: "top-left",
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+            });
         }
     }
 

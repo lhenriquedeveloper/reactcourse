@@ -60,7 +60,7 @@ function AuthProvider({ children }) {
             .catch((error) => {
                 toast.error('Algo deu errado !', {
                     theme: "light",
-                    position: "top-right",
+                    position: "top-left",
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -109,7 +109,7 @@ function AuthProvider({ children }) {
                 console.log(error);
                 toast.error('Algo deu errado !', {
                     theme: "light",
-                    position: "top-right",
+                    position: "top-left",
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,

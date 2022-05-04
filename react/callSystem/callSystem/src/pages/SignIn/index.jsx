@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import "../../styles/css/signin.css";
 import logo from "../../assets/logo.png";
 import { AuthContext } from "../../contexts/auth";
+import { toast } from "react-toastify";
+
 
 
 function SignIn() {
@@ -21,7 +23,12 @@ function SignIn() {
             history.push("/dashboard");
         }
         else {
-            alert("Preencha todos os campos!");
+            toast.error('Preencha todos os campos!', {
+                position: "top-left",
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+            });
         }
     }
 
