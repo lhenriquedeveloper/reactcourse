@@ -35,10 +35,11 @@
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
-  margin: 0 !important;
+  margin: 0;
   padding: 0;
-  width: 100%;
   table-layout: fixed;
+  display: flex;
+  justify-self: center;
 }
 table caption {
   font-size: 1.5em;

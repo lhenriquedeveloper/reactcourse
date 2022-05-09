@@ -10,7 +10,7 @@ import "../../styles/css/dashboard.css";
 
 
 export default function Dashboard() {
-    const [chamados, setChamados] = useState([1]);
+    const [chamados, setChamados] = useState([]);
 
 
 
@@ -48,7 +48,7 @@ export default function Dashboard() {
                                     <th scope="col">Assunto</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Cadastrado em:</th>
-                                    <th scope="col">#</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 <tbody>
                                     <tr>
