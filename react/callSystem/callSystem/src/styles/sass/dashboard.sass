@@ -31,8 +31,8 @@ table
     border-collapse: collapse,
     margin: 0,
     padding: 0,
+    width: 100%
     table-layout: fixed,
-    display: flex,
     justify-self: center,
     caption
         font-size: 1.5em,
@@ -52,12 +52,13 @@ table
         padding: 3px,
         border-radius: 3px,
         color: #fff,
-    td .action
+        svg
+            vertical-align: middle,
+
+    button.dash-button
         border: 0,
         padding: 5px,
         margin-right: 2px,
         align-items: center,
         display: inline-block,
         border-radius: 4px,
-        svg
-            vertical-align: middle,

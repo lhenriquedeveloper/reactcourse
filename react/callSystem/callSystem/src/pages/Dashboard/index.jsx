@@ -1,9 +1,8 @@
-import { useState } from "react";
+import firebase from "../../services/firebaseConnection";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FcAbout } from "react-icons/fc";
 import { FiPlus, FiSearch, FiEdit2 } from "react-icons/fi";
-
-
 import Header from "../../components/Header";
 import Title from "../../components/Title";
 import "../../styles/css/dashboard.css";
@@ -11,8 +10,12 @@ import "../../styles/css/dashboard.css";
 
 export default function Dashboard() {
     const [chamados, setChamados] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div>
@@ -50,25 +53,25 @@ export default function Dashboard() {
                                     <th scope="col">Cadastrado em:</th>
                                     <th scope="col"></th>
                                 </tr>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Cliente">Escola</td>
-                                        <td data-label="Assunto">Suporte</td>
-                                        <td data-label="Status">
-                                            <span className="badge" style={{ backgroundColor: '#5cb85c' }}>Em aberto</span>
-                                        </td>
-                                        <td data-label="Cadastado">08/05/2022</td>
-                                        <td data-label="#">
-                                            <button style={{ backgroundColor: '#3586f6' }}>
-                                                <FiSearch color="#fff" size={17} />
-                                            </button>
-                                            <button style={{ backgroundColor: '#f6a935' }}>
-                                                <FiEdit2 color="#fff" size={17} />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Cliente">Escola</td>
+                                    <td data-label="Assunto">Suporte</td>
+                                    <td data-label="Status">
+                                        <span className="badge" style={{ backgroundColor: '#5cb85c' }}>Em aberto</span>
+                                    </td>
+                                    <td data-label="Cadastado">08/05/2022</td>
+                                    <td data-label="#">
+                                        <button className="dash-button" style={{ backgroundColor: '#3586f6' }}>
+                                            <FiSearch color="#fff" size={17} />
+                                        </button>
+                                        <button className="dash-button" style={{ backgroundColor: '#f6a935' }}>
+                                            <FiEdit2 color="#fff" size={17} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 )
