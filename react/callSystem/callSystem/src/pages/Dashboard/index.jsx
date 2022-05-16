@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import Title from "../../components/Title";
 import "../../styles/css/dashboard.css";
 import format from "date-fns/format";
+import Modal from "../../components/Modal";
 
 
 const listRef = await firebase.firestore().collection('chamados').orderBy('created', 'desc')
@@ -17,14 +18,17 @@ export default function Dashboard() {
     const [loadingMore, setLoadingMore] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const [lastDocs, setLastDocs] = useState();
+    const [showPostModal, setShowPostModal] = useState(false);
+    const [detail, setDetail] = useState();
+
 
     useEffect(() => {
         loadChamados();
-
         return () => {
 
         }
     }, [])
+
 
     async function loadChamados() {
         await listRef.limit(5)
@@ -69,6 +73,22 @@ export default function Dashboard() {
         setLoadingMore(false);
     }
 
+
+    async function handleMore() {
+        setLoadingMore(true);
+        await listRef.startAfter(lastDocs).limit(5)
+            .get()
+            .then((snapshot) => {
+                updateState(snapshot)
+            })
+
+    }
+
+    function togglePostModal(item) {
+        setShowPostModal(!showPostModal)
+        setDetail(item);
+    }
+
     if (loading) {
         return (
             <div>
@@ -87,7 +107,6 @@ export default function Dashboard() {
 
         )
     }
-
 
 
     return (
@@ -138,12 +157,12 @@ export default function Dashboard() {
                                             </td>
                                             <td data-label="Cadastado">{item.createdFormated}</td>
                                             <td data-label="#">
-                                                <button className="dash-button" style={{ backgroundColor: '#3586f6' }}>
+                                                <button className="dash-button" style={{ backgroundColor: '#3586f6' }} onClick={() => togglePostModal(item)}>
                                                     <FiSearch color="#fff" size={17} />
                                                 </button>
-                                                <button className="dash-button" style={{ backgroundColor: '#f6a935' }}>
+                                                <Link className="dash-button" style={{ backgroundColor: '#f6a935' }} to={`/new/${item.id}`}>
                                                     <FiEdit2 color="#fff" size={17} />
-                                                </button>
+                                                </Link>
                                             </td>
                                         </tr>
                                     )
@@ -151,10 +170,17 @@ export default function Dashboard() {
 
                             </tbody>
                         </table>
+                        {loadingMore && <h3 style={{ textAlign: 'center', marginTop: 15 }}>Buscando dados...</h3>}
+                        {!loadingMore && !isEmpty && <button className="btn-more" onClick={handleMore}>Mostrar mais chamados</button>}
                     </div>
                 )
             }
-
+            {showPostModal && (
+                <Modal
+                    conteudo={detail}
+                    close={togglePostModal}
+                />
+            )}
         </div >
     )
 }
