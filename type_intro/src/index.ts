@@ -1,5 +1,4 @@
 // TS Types: String, boolean, number, etc.
-
 let firstName: string = "Luis";
 let age: number = 19;
 const isAdmin: boolean = true;
@@ -20,7 +19,6 @@ x = 20;
 
 
 //Inferencia x Annotation
-
 // I 
 let y = 12;
 // A
@@ -72,3 +70,73 @@ console.log(camisa);
 let teste: 'Autenticado' | null;
 teste = null;
 teste = 'Autenticado';
+console.log(teste);
+
+//Funções
+function sum(a: number, b: number) {
+    return a + b;
+}
+let soma: number = sum(20, 50);
+console.log(soma);
+
+function sayHelloTo(name: string): string {
+    return `Hello ${name}`;
+}
+console.log(sayHelloTo('Luis'));
+
+function Logger(msg: string): void {
+    console.log(msg);
+}
+Logger("Teste");
+
+function Greetting(greet: string, name?: string): void {
+    if (name) {
+        console.log(`${greet},${name}`);
+    }
+    else {
+        console.log(`${greet}, Visitante`);
+    }
+}
+Greetting('Olá', 'Luis');
+Greetting('Bem vindo');
+
+//Interfaces
+interface MathFunctioParams {
+    n1: number,
+    n2: number
+}
+
+function sumNumbers(nums: MathFunctioParams) {
+    return nums.n1 + nums.n2;
+}
+
+console.log(sumNumbers({ n1: 1, n2: 2 }));
+
+//narrowing
+//Checagem da tipagem de dados
+
+//generics
+function showArraysItems<T>(arr: T[]) {
+    arr.forEach((item) => {
+        console.log(`ITEM: ${item}`);
+    })
+}
+const array1 = [1, 2, 3, 4, 5];
+const array2 = ["Luis", "João", "Lucas"];
+
+showArraysItems(array1);
+
+//classes
+class User {
+    name;
+    role;
+    isApproved;
+    constructor(name: string, role: string, isApproved: boolean) {
+        this.name = name;
+        this.role = role;
+        this.isApproved = isApproved;
+    }
+}
+
+const user1 = new User("Luis", "Admin", true);
+console.log(user1);
