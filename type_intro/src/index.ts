@@ -15,7 +15,7 @@ console.log(myNumbers.length);
 
 let x: number = 15;
 x = 20;
-// console.log(x);
+console.log(x);
 
 
 //Inferencia x Annotation
@@ -48,7 +48,6 @@ id = 10;
 console.log(id);
 
 //Type Alias
-
 type idType = number | string;
 const idUser: idType = 3442943;
 console.log(idUser);
@@ -112,10 +111,9 @@ function sumNumbers(nums: MathFunctioParams) {
 
 console.log(sumNumbers({ n1: 1, n2: 2 }));
 
-//narrowing
-//Checagem da tipagem de dados
+//Narrowing - Checagem da tipagem de dados
+//Generics
 
-//generics
 function showArraysItems<T>(arr: T[]) {
     arr.forEach((item) => {
         console.log(`ITEM: ${item}`);
@@ -126,7 +124,7 @@ const array2 = ["Luis", "João", "Lucas"];
 
 showArraysItems(array1);
 
-//classes
+//Classes
 class User {
     name;
     role;
@@ -136,7 +134,68 @@ class User {
         this.role = role;
         this.isApproved = isApproved;
     }
-}
 
+    showUserName() {
+        console.log(`O nome do usuário é ${this.name}`);
+    }
+
+}
 const user1 = new User("Luis", "Admin", true);
 console.log(user1);
+user1.showUserName();
+
+//Interfaces em Classes
+interface IVehicle {
+    brand: string
+    showBrand(): void
+}
+
+class Car implements IVehicle {
+    brand;
+    wheels;
+
+    constructor(brand: string, wheels: number) {
+        this.brand = brand;
+        this.wheels = wheels;
+    }
+
+    showBrand(): void {
+        console.log(`A marca do carro é: ${this.brand}`);
+    }
+}
+
+const fusca = new Car("VW", 4);
+fusca.showBrand();
+
+//Herança
+class SuperCar extends Car {
+    engine
+    constructor(brand: string, wheels: number, engine: number) {
+        super(brand, wheels)
+        this.engine = engine;
+    }
+}
+const a4 = new SuperCar("Audi", 4, 2.0);
+console.log(a4);
+a4.showBrand();
+
+//Decorators
+//Contructor Decorator
+function BaseParameters() {
+    return function <T extends { new(...args: any[]): {} }>(constructor: T) {
+        return class extends constructor {
+            id = Math.random();
+            createdAt = new Date();
+        }
+    }
+}
+
+@BaseParameters()
+class Person {
+    name
+    constructor(name: string) {
+        this.name = name
+    }
+}
+const sam = new Person("Sam");
+console.log(sam);
