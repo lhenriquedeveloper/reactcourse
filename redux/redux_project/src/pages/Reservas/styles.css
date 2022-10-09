@@ -37,3 +37,16 @@ footer button {
     background-color: #fff;
     color: #191919;
 }
+
+.reservas #amount {
+    display: flex;
+    align-items: center;
+}
+
+.reservas #amount input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #ddd;
+    padding: 5px;
+    width: 45px;
+}
